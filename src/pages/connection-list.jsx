@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ValidatedComponent from 'utils/validated-component.jsx'
 import ConnectionListItem from './connection-list-item.jsx';
+import ConnectionForm from './connection-form.jsx';
 import LoadingPage from './loading.jsx';
 import List from '../widgets/list.jsx';
 import { Link } from 'react-router';
@@ -33,14 +34,17 @@ export default class ConnectionList extends ValidatedComponent {
     const { connectionToDrop } = this.state;
 
     return connections.length > 0 ?
-      <List>
-        {connections.map((connection,i) =>
-          <ConnectionListItem
-            onClick={::this.onItemClick}
-            key={i}
-            connection={connection} />
-        )}
-      </List>
+      <div>
+        <List>
+          {connections.map((connection,i) =>
+            <ConnectionListItem
+              onClick={::this.onItemClick}
+              key={i}
+              connection={connection} />
+          )}
+        </List>
+        <ConnectionForm />
+      </div>
     : <LoadingPage />;
   }
 };
