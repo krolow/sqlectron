@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ConnectionActions from '../actions/connections.js';
 import ConnectionList from '../components/connection-list.jsx';
-
+import Head from '../components/head.jsx';
 
 export default class ConnectionListContainer extends Component {
   static propTypes = {
@@ -32,8 +32,11 @@ export default class ConnectionListContainer extends Component {
 
     return (
       <div>
-        List of Connections
-        <ConnectionList connections={connections} actions={actions} />
+        <Head />
+        <div className="main ui container">
+          <h4 className="ui header">List of Connections</h4>
+          <ConnectionList connections={connections} actions={actions} />
+        </div>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as DatabaseActions from '../actions/databases.js';
 import * as QueryActions from '../actions/query.js';
+import Head from '../components/head.jsx';
 import DatabaseList from '../components/database-list.jsx';
 import Query from '../components/query.jsx';
 
@@ -49,36 +50,40 @@ export default class DatabaseListContainer extends Component {
   }
 
   render() {
+    const pages = [{link: '/', icon: 'list', name: 'Connections'}, {link: '#', icon: 'terminal', name: 'Query Browser'}];
     const { databases, query, dispatch } = this.props;
     const dbActions = bindActionCreators(DatabaseActions, dispatch);
     const queryActions = bindActionCreators(QueryActions, dispatch);
 
     return (
-      <div style={STYLES.wrapper}>
-        <div style={STYLES.header}>
-        </div>
-
-        <div className="ui secondary menu">
-          <div className="right menu">
-            <div className="item">
-              <Link to="/" className="ui icon button" title="Close connection">
-                <i className="ban icon"></i>
-              </Link>
-            </div>
+      <div>
+        <Head pages={pages} />
+        <div style={STYLES.wrapper}>
+          <div style={STYLES.header}>
           </div>
-        </div>
 
-        <div style={STYLES.container}>
-          <div style={STYLES.sidebar}>
-            <div className="ui vertical menu">
+          <div className="ui secondary menu">
+            <div className="right menu">
               <div className="item">
-                <div className="ui input"><input type="text" placeholder="Search..." /></div>
+                <Link to="/" className="ui icon button" title="Close connection">
+                  <i className="ban icon"></i>
+                </Link>
               </div>
-              <DatabaseList databases={databases} actions={dbActions} />
             </div>
           </div>
-          <div style={STYLES.content}>
-            <Query query={query} actions={queryActions} />
+
+          <div style={STYLES.container}>
+            <div style={STYLES.sidebar}>
+              <div className="ui vertical menu">
+                <div className="item">
+                  <div className="ui input"><input type="text" placeholder="Search..." /></div>
+                </div>
+                <DatabaseList databases={databases} actions={dbActions} />
+              </div>
+            </div>
+            <div style={STYLES.content}>
+              <Query query={query} actions={queryActions} />
+            </div>
           </div>
         </div>
       </div>
